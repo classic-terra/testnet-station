@@ -2,8 +2,16 @@ import { useChainID } from "auth/hooks/useNetwork"
 import { LAZY_LIMIT } from "config/constants"
 
 export const useIsClassic = () => {
-  const chainId = useChainID()
-  return chainId.startsWith("columbus")
+  const networkName = useChainID()
+  //return chainId.startsWith("columbus")
+  let classic = false
+  if (networkName === "columbus-5") {
+    classic = true
+  }
+  if (networkName === "rebel-2") {
+    classic = true
+  }
+  return classic // TODO
 }
 
 /* refetch */
@@ -29,8 +37,8 @@ export const combineState = (...results: QueryState[]) => ({
 /* queryKey */
 const mirror = <T>(obj: T, parentKey?: string): T =>
   Object.entries(obj).reduce((acc, [key, value]) => {
-    const next = value 
-      ? mirror(value, key) 
+    const next = value
+      ? mirror(value, key)
       : [parentKey, key].filter(Boolean).join(".")
 
     return { ...acc, [key]: next }

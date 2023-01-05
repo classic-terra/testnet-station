@@ -59,7 +59,8 @@ export type GasPrices = Record<Denom, Amount>
 export const useGasPrices = () => {
   const current = useTerraAPIURL()
   const mainnet = useTerraAPIURL(true)
-  const baseURL = current ?? mainnet
+  //const baseURL = current ?? mainnet
+  const baseURL = "https://columbus-api.terra.dev/"
   const path = "/gas-prices"
 
   return useQuery(
